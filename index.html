@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wix Iframe Test</title>
+  <style>
+    html, body { margin:0; padding:0; overflow-x:hidden; box-sizing:border-box; }
+    * { box-sizing:inherit; }
+    details { border:1px solid #aaa; margin:12px; padding:0 16px; border-radius:8px; background:#f7f7f7; }
+    summary { font-size:20px; cursor:pointer; padding:12px; }
+    details ul { margin:0; padding:12px; list-style:none; color:#333; }
+  </style>
+</head>
+<body>
+  <h2>Wix Iframe Auto‑Resize 測試頁</h2>
+  <details><summary>區塊一</summary><ul><li>內容行 A</li><li>內容行 B</li></ul></details>
+  <details><summary>區塊二</summary><ul><li>項目 1</li><li>項目 2</li><li>項目 3</li></ul></details>
+  <details><summary>區塊三（測試長內容）</summary>
+    <ul>
+      <li>Line 1</li><li>Line 2</li><li>Line 3</li><li>Line 4</li>
+      <li>Line 5</li><li>Line 6</li><li>Line 7</li><li>Line 8</li>
+    </ul>
+  </details>
+
+  <script>
+    function sendHeight() {
+      const height = document.body.scrollHeight;
+      window.parent.postMessage({ type: 'iframeHeight', height }, '*');
+    }
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('resize', sendHeight);
+    setInterval(sendHeight, 500);
+  </script>
+</body>
+</html>
